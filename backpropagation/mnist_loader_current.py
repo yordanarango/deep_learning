@@ -68,15 +68,15 @@ def load_data_wrapper():
     training_inputs_aux  = [np.reshape(x, (784, 1)) for x in tr_X]
     training_results_aux = [vectorized_result(y) for y in tr_y]
     
-    training_inputs      = training_inputs_aux[:5000]
-    training_results     = training_results_aux[:5000]
-    training_data        = zip(training_inputs, training_results)
+    training_inputs      = training_inputs_aux[:50000]
+    training_results     = training_results_aux[:50000]
+    training_data        = list(zip(training_inputs, training_results))
     
     validation_inputs    = training_inputs_aux[50000:]
-    validation_data      = zip(validation_inputs, tr_y[50000:])
+    validation_data      = list(zip(validation_inputs, tr_y[50000:]))
     
     test_inputs          = [np.reshape(x, (784, 1)) for x in te_X]
-    test_data            = zip(test_inputs, te_y)
+    test_data            = list(zip(test_inputs, te_y))
 
     return (training_data, validation_data, test_data)
 
@@ -88,5 +88,3 @@ def vectorized_result(j):
     e = np.zeros((10, 1))
     e[j] = 1.0
     return e
-
-training_data, validation_data, test_data = load_data_wrapper()
